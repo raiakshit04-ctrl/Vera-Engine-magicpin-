@@ -4,7 +4,6 @@ def generate_message(context, decision, reason):
     offer = context["offer"]
     trigger = context.get("trigger", "").lower()
 
-    # 🔥 Category-aware hooks
     category_lower = category.lower()
 
     if "restaurant" in category_lower:
@@ -18,7 +17,6 @@ def generate_message(context, decision, reason):
     else:
         hook = "📈 Grow your business"
 
-    # 🔥 Trigger awareness (CRITICAL for scoring)
     extra_line = ""
 
     if "festival" in trigger:
@@ -29,11 +27,7 @@ def generate_message(context, decision, reason):
         extra_line = "⚠️ A competitor is actively attracting customers nearby.\n\n"
     elif "recall" in trigger or "due" in trigger:
         extra_line = "🔁 Customers are due for a follow-up.\n\n"
-
-    # 🔥 Strong CTA (MOST IMPORTANT)
     cta = "👉 Want me to push this offer to nearby customers?"
-
-    # 🔥 Message templates
 
     if decision == "performance_boost":
         return (
@@ -75,7 +69,6 @@ def generate_message(context, decision, reason):
             f"{cta}"
         )
 
-    # 🔥 Default (general engagement)
     return (
         f"📢 Quick insight for *{name}*\n\n"
         f"{extra_line}"
