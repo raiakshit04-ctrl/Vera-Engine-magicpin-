@@ -4,14 +4,12 @@ from data_loader import MERCHANTS, TRIGGERS, CUSTOMERS, CATEGORIES
 
 
 def normalize_data(data):
-    # Case 1: wrapped dict
     if isinstance(data, dict):
         if "data" in data:
             data = data["data"]
         else:
             data = list(data.values())
 
-    # Case 2: nested list like [[...]]
     if isinstance(data, list) and len(data) == 1 and isinstance(data[0], list):
         data = data[0]
 
@@ -29,8 +27,6 @@ def run_batch(input_file, output_file):
     results = []
 
     for item in data:
-    # rest of your logic (temporarily ignored because of break)
-        # 🔥 Skip invalid entries
         if not isinstance(item, dict):
             continue
 
