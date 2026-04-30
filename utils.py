@@ -4,7 +4,6 @@ def build_context(input_data):
     customer = input_data.get("customer", {})
     category = input_data.get("category", {})
 
-    # 🔥 Handle trigger (string OR dict)
     if isinstance(trigger, str):
         trigger_type = trigger
     elif isinstance(trigger, dict):
@@ -12,14 +11,12 @@ def build_context(input_data):
     else:
         trigger_type = ""
 
-    # 🔥 Merchant fields
     identity = merchant.get("identity", {})
     offers = merchant.get("offers", [])
     performance = merchant.get("performance", {})
 
     merchant_name = identity.get("name", "Your store")
 
-    # 🔥 Category handling
     category_slug = merchant.get("category_slug", "")
 
     category_map = {
@@ -35,7 +32,6 @@ def build_context(input_data):
         or "business"
     )
 
-    # 🔥 Offer handling (fallback fixed)
     if offers and isinstance(offers, list):
         offer_text = offers[0].get("title", "")
     else:
