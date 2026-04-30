@@ -5,9 +5,6 @@ def decide_message_type(context):
 
     views = delta.get("views_pct", 0)
 
-    # 🔥 Priority-based decisions
-
-    # Customer inactivity → Reactivation
     if context.get("customer_segment") == "inactive":
         return "reactivation"
 
@@ -20,19 +17,15 @@ def decide_message_type(context):
     if "recall" in trigger or "due" in trigger:
         return "reactivation"
 
-    # Seasonal / event-based
     if "festival" in trigger or "event" in trigger:
         return "seasonal_campaign"
 
-    # Urgency
     if "expiry" in trigger or "deadline" in trigger:
         return "urgency_push"
 
-    # Competitive pressure
     if "competitor" in trigger:
         return "performance_boost"
 
-    # 🔥 Performance drop (only if meaningful)
     if views is not None and views < -0.05:
         return "performance_boost"
 
@@ -68,7 +61,6 @@ def generate_reason(context, decision):
     if decision == "reactivation":
         return "some customers haven’t visited in a while"
 
-    # 🔥 Smart fallback using trigger
     if "festival" in trigger:
         return "upcoming festive demand can significantly boost customer traffic"
 
