@@ -10,24 +10,19 @@ def refine_with_llm(message, context, decision):
     discount = context.get("discount", "")
     timing = context.get("timing", "")
 
-    # 🔥 Add urgency punch
     if decision == "urgency_push":
         if "midnight" not in message.lower():
             message += " Hurry, ends tonight!"
 
-    # 🎉 Make seasonal more exciting
     if decision == "seasonal_campaign":
         message = message.replace("!", "!! 🎉")
 
-    # 📉 Improve performance tone
     if decision == "performance_boost":
         message = message.replace("Try promoting", "Boost sales with")
 
-    # 👋 Make reactivation more human
     if decision == "reactivation":
         message = message.replace("We miss you!", f"We miss you at {name}!")
 
-    # ✨ General polish
     message = message.replace("  ", " ")
     message = message.strip()
 
